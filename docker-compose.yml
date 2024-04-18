@@ -20,6 +20,7 @@ services:
       APLUS_ENABLE_DJANGO_DEBUG_TOOLBAR: 'false'
     volumes:
       - data:/data
+      - /home/ubuntu/codesource-aplus/a-plus:/src/aplus/:ro
     ports:
       - "8000:8000"
     depends_on:
