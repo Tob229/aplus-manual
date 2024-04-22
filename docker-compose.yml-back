@@ -1,8 +1,4 @@
-version: '3'
-
-networks:
-  aplus_network:
-    driver: bridge
+version: '2.6'
 
 volumes:
   data:
@@ -16,12 +12,10 @@ services:
       - data:/data
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/aplus:/tmp/aplus
-      - /home/ubuntu/memoire/codesource-aplus/mooc-grader:/src/grader/:ro
+    #  - /home/ubuntu/memoire/codesource-aplus/mooc-grader:/src/grader/:ro
       - .:/srv/courses/default:ro
     ports:
       - "8080:8080"
-    networks:
-      - aplus_network
 
   plus:
     image: apluslms/run-aplus-front:1.19
@@ -36,8 +30,6 @@ services:
       - grader
       - acos
       - rubyric
-    networks:
-      - aplus_network
 
   jutut:
     image: apluslms/run-mooc-jutut:2.5
@@ -46,8 +38,6 @@ services:
       - /home/ubuntu/memoire/codesource-aplus/mooc-jutut:/src/jutut/:ro
     ports:
       - "8082:8082"
-    networks:
-      - aplus_network
 
   acos:
     image: levide229/run-aplus-acos:1.0.3  # apluslms/run-acos-server
@@ -57,8 +47,6 @@ services:
 #    volumes:
 #      - ./_data/acos/:/var/log/acos
 #    command: npm run dev
-    networks:
-      - aplus_network
 
   radar:
     image: apluslms/run-radar
@@ -77,8 +65,6 @@ services:
       - data:/data
     # mount development version to /src/radar
       - /home/ubuntu/memoire/codesource-aplus/radar:/src/radar/:ro
-    networks:
-      - aplus_network
 
   rubyric:
     image: apluslms/run-rubyric
@@ -89,8 +75,6 @@ services:
       - "8091:8091"
     depends_on:
       - rubyricdb
-    networks:
-      - aplus_network
 
   rubyricdb:
     image: postgres:13-bullseye
@@ -103,5 +87,3 @@ services:
       - rubyricdb:/var/lib/postgresql/data
       - ./configdb/postgresql.conf:/etc/postgresql/postgresql.conf
       - ./configdb/pg_hba.conf:/etc/postgresql/pg_hba.conf
-    networks:
-      - aplus_network
