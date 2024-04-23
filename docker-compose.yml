@@ -50,7 +50,7 @@ services:
       - aplus_network
 
   acos:
-    image: levide229/run-aplus-acos:1.0.3  # apluslms/run-acos-server
+    image: levide229/run-aplus-acos:1.0.3  # apluslms/run-acos-server ( j'ai modifier la ersion officielle 
     user: $USER_ID:$USER_GID
     ports:
       - "3000:3000"
