@@ -99,9 +99,9 @@ services:
       POSTGRES_USER: rubyric
       POSTGRES_PASSWORD: rubyric
       POSTGRES_DB: rubyric
+    ports:
+      - "5432:5432"
     volumes:
       - rubyricdb:/var/lib/postgresql/data
-      - ./configdb/postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./configdb/pg_hba.conf:/etc/postgresql/pg_hba.conf
     networks:
       - aplus_network
